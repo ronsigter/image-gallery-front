@@ -30,7 +30,7 @@ export const GalleryDashboard: React.FC = () => {
         </Flex>
         <Flex ml='auto' gap='4'>
           <Button>Add Photos</Button>
-          <NextLink href='/create-album' passHref>
+          <NextLink href='/album/new' passHref>
             <Button as='a'>Create Album</Button>
           </NextLink>
         </Flex>
