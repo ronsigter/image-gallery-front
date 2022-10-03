@@ -3,8 +3,13 @@ import type { NextPage } from 'next'
 import { Photos } from './Photos'
 
 const PhotosContainer: NextPage = () => {
+  const backPath = {
+    label: 'Back to Gallery',
+    path: '/',
+  }
+
   return (
-    <GalleryLayout pageTitle='Photos'>
+    <GalleryLayout pageTitle='Photos' backPath={backPath}>
       <Photos />
     </GalleryLayout>
   )
