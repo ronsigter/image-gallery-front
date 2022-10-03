@@ -1,3 +1,4 @@
+import NextLink from 'next/link'
 import {
   Box,
   Button,
@@ -29,7 +30,9 @@ export const GalleryDashboard: React.FC = () => {
         </Flex>
         <Flex ml='auto' gap='4'>
           <Button>Add Photos</Button>
-          <Button>Create Album</Button>
+          <NextLink href='/create-album' passHref>
+            <Button as='a'>Create Album</Button>
+          </NextLink>
         </Flex>
       </Flex>
       <Box py='4'>
