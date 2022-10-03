@@ -16,7 +16,7 @@ export const GalleryLayout: React.FC<GalleryLayoutProps> = ({
   backPath,
 }) => {
   return (
-    <Container maxW='1423px' py='10'>
+    <Container maxW='1423px' p='10'>
       <Stack spacing='6' pb='10'>
         {backPath && (
           <Box>
