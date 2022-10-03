@@ -1,5 +1,5 @@
 import { Flex } from '@chakra-ui/react'
-import { PhotoCard } from 'components/PhotoCard'
+import { PhotoCard } from './PhotoCard'
 
 export const Photos: React.FC = () => {
   return (

@@ -17,7 +17,7 @@ export const GalleryLayout: React.FC<GalleryLayoutProps> = ({
 }) => {
   return (
     <Container maxW='1423px' p='10'>
-      <Stack spacing='6' pb='10'>
+      <Stack spacing='6' pb='9'>
         {backPath && (
           <Box>
             <NextLink href={backPath.path}>

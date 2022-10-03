@@ -10,7 +10,7 @@ import {
   Text,
   Textarea,
 } from '@chakra-ui/react'
-import { Photos } from './components'
+import { Photos } from 'components'
 
 export const CreateAlbum: React.FC = () => {
   return (

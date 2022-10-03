@@ -1,8 +1,8 @@
 import { GalleryLayout } from 'layout'
 import type { NextPage } from 'next'
-import { Photos } from './Photos'
+import { ViewPhotos } from './ViewPhotos'
 
-const PhotosContainer: NextPage = () => {
+const ViewContainer: NextPage = () => {
   const backPath = {
     label: 'Back to Gallery',
     path: '/',
@@ -10,9 +10,9 @@ const PhotosContainer: NextPage = () => {
 
   return (
     <GalleryLayout pageTitle='Photos' backPath={backPath}>
-      <Photos />
+      <ViewPhotos />
     </GalleryLayout>
   )
 }
 
-export default PhotosContainer
+export default ViewContainer
