@@ -1,6 +1,6 @@
 import NextLink from 'next/link'
 import { Box, Button, Flex, FormLabel, Input, Select } from '@chakra-ui/react'
-import { Albums } from './components'
+import { ActionButtons, Albums } from './components'
 
 export const GalleryDashboard: React.FC = () => {
   return (
@@ -16,12 +16,7 @@ export const GalleryDashboard: React.FC = () => {
             </Select>
           </Flex>
         </Flex>
-        <Flex ml='auto' gap='4'>
-          <Button>Add Photos</Button>
-          <NextLink href='/album/new' passHref>
-            <Button as='a'>Create Album</Button>
-          </NextLink>
-        </Flex>
+        <ActionButtons />
       </Flex>
       <Box py='4'>
         <Albums />
