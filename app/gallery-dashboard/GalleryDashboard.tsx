@@ -13,10 +13,7 @@ import { Albums } from './components'
 
 export const GalleryDashboard: React.FC = () => {
   return (
-    <Container maxW='1423px'>
-      <Text fontWeight='bold' py='10' fontSize='3xl'>
-        Image Gallery
-      </Text>
+    <Box>
       <Flex alignItems='center'>
         <Flex gap='4'>
           <Input placeholder='Search Album' />
@@ -38,6 +35,6 @@ export const GalleryDashboard: React.FC = () => {
       <Box py='4'>
         <Albums />
       </Box>
-    </Container>
+    </Box>
   )
 }

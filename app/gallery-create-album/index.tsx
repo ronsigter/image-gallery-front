@@ -1,7 +1,8 @@
 import type { NextPage } from 'next'
+import { CreateAlbum } from './CreateAlbum'
 
 const CreateAlbumContainer: NextPage = () => {
-  return <>Create Album</>
+  return <CreateAlbum />
 }
 
 export default CreateAlbumContainer
