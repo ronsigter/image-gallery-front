@@ -1,5 +1,5 @@
 import { Box } from '@chakra-ui/react'
 
-export const ViewAlbum: React.FC = () => {
+export const Photos: React.FC = () => {
   return <Box>Create Album</Box>
 }

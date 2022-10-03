@@ -1,14 +1,5 @@
 import NextLink from 'next/link'
-import {
-  Box,
-  Button,
-  Container,
-  Flex,
-  FormLabel,
-  Input,
-  Select,
-  Text,
-} from '@chakra-ui/react'
+import { Box, Button, Flex, FormLabel, Input, Select } from '@chakra-ui/react'
 import { Albums } from './components'
 
 export const GalleryDashboard: React.FC = () => {
