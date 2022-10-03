@@ -10,6 +10,7 @@ import {
   Text,
   Textarea,
 } from '@chakra-ui/react'
+import { Photos } from './components'
 
 export const CreateAlbum: React.FC = () => {
   return (
@@ -30,7 +31,7 @@ export const CreateAlbum: React.FC = () => {
           </FormControl>
         </Stack>
       </Box>
-      <Flex pb='2' pt='6'>
+      <Flex pb='4' pt='6'>
         <Flex gap='2' alignItems='center'>
           <Text minW='100px'>Sort by:</Text>
           <Select w='100%'>
@@ -43,6 +44,9 @@ export const CreateAlbum: React.FC = () => {
           <Button>Clear All</Button>
         </Flex>
       </Flex>
+      <Box>
+        <Photos />
+      </Box>
     </Box>
   )
 }
