@@ -11,7 +11,12 @@ import {
   Box,
   ModalProps,
 } from '@chakra-ui/react'
-import { UploadPhotoType, UploadPhotoVars, UPLOAD_PHOTO } from 'graphql/gql'
+import {
+  LIST_PHOTOS,
+  UploadPhotoType,
+  UploadPhotoVars,
+  UPLOAD_PHOTO,
+} from 'graphql/gql'
 
 export const AddPhotoModal: React.FC<Omit<ModalProps, 'children'>> = (
   props
@@ -27,6 +32,7 @@ export const AddPhotoModal: React.FC<Omit<ModalProps, 'children'>> = (
         name: 'Client Image',
         type: 'image/jpg',
       },
+      refetchQueries: [{ query: LIST_PHOTOS }],
     })
 
     props.onClose()
