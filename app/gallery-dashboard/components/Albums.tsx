@@ -1,10 +1,11 @@
 import NextLink from 'next/link'
 import { Link, Flex } from '@chakra-ui/react'
 import { AlbumCard, BlankState, LoadingState } from 'components'
-import { useAlbums } from 'hooks'
+import { useAlbums, usePhotos } from 'hooks'
 
 export const Albums: React.FC = () => {
   const { albums, loading } = useAlbums()
+  const { photos } = usePhotos()
 
   if (loading) return <LoadingState message='Loading albums...' />
 
@@ -28,7 +29,8 @@ export const Albums: React.FC = () => {
               __typename: 'Album',
               description: 'View more',
               name: 'VIEW ALL',
-              photos: [],
+              photos: photos,
+              insertedAt: '',
             }}
           />
         </Link>

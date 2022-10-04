@@ -1,5 +1,6 @@
 import { Box, Flex, Image, Stack, Text } from '@chakra-ui/react'
 import type { Album } from 'graphql/gql'
+import { readableDate } from 'utils'
 
 type AlbumCardProps = {
   album: Album
@@ -23,7 +24,7 @@ export const AlbumCard: React.FC<AlbumCardProps> = ({ album }) => {
         <Flex>
           <Text fontSize='x-small'>{album?.photos.length || 0} Photos</Text>
           <Text fontSize='x-small' ml='auto'>
-            {album?.insertedAt || '---'}
+            {readableDate(album?.insertedAt)}
           </Text>
         </Flex>
       </Stack>
