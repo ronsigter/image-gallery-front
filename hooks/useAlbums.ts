@@ -11,31 +11,33 @@ export const useAlbums = () => {
     },
   })
 
-  const soryBy_ = (sort_: string): void => {
-    const albumsData = [...albums]
-    const sortedAlbums: { [key: string]: Album[] } = {
-      name: albumsData.sort((a, b) =>
-        a.name > b.name ? 1 : b.name > a.name ? -1 : 0
-      ),
-      createdDate: albumsData.sort((a, b) =>
-        a.name > b.name ? 1 : b.name > a.name ? -1 : 0
-      ),
-    }
+  const sortAlbums = (albumsData: Album[]): { [key: string]: Album[] } => ({
+    name: albumsData.sort((a, b) =>
+      a.name > b.name ? 1 : b.name > a.name ? -1 : 0
+    ),
+    createdDate: albumsData.sort((a, b) =>
+      a.name > b.name ? 1 : b.name > a.name ? -1 : 0
+    ),
+  })
 
-    AlbumsVar(sortedAlbums[sort_])
+  const sortBy = (sort: string): void => {
+    const albumsData = [...albums]
+    const sortedAlbums = sortAlbums(albumsData)[sort]
+    AlbumsVar(sortedAlbums)
   }
 
-  const searchByName = (term: string): void => {
+  const searchByName = (term: string, sort: string): void => {
     const albumsData = [...(data?.listAlbums || [])]
     const filteredAlbums = albumsData.filter(({ name }) =>
       name.toLocaleLowerCase().includes(term.toLocaleLowerCase())
     )
-    AlbumsVar(filteredAlbums)
+    const sortedAlbums = sortAlbums(filteredAlbums)[sort] || []
+    AlbumsVar(sortedAlbums)
   }
 
   return {
     albums,
-    soryBy: soryBy_,
+    sortAlbumBy: sortBy,
     loading,
     searchByName,
   }

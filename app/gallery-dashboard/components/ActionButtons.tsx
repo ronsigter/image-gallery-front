@@ -9,20 +9,22 @@ import {
 } from '@chakra-ui/react'
 import { AddPhotoModal } from './AddPhotoModal'
 import { useAlbums } from 'hooks'
-import React from 'react'
+import React, { useState } from 'react'
 
 export const ActionButtons: React.FC = () => {
   const { onOpen, onClose, isOpen } = useDisclosure()
-  const { soryBy, searchByName } = useAlbums()
+  const { sortAlbumBy, searchByName } = useAlbums()
+  const [sortBy, setSortBy] = useState<string>('name')
 
   const handleOnChangeSort = (
     e: React.ChangeEvent<HTMLSelectElement>
   ): void => {
-    soryBy(e.target.value)
+    sortAlbumBy(e.target.value)
+    setSortBy(e.target.value)
   }
 
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>): void => {
-    searchByName(e.target.value)
+    searchByName(e.target.value, sortBy)
   }
 
   return (
