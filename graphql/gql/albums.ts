@@ -54,3 +54,20 @@ export const CREATE_PHOTO_ALBUM = gql`
     }
   }
 `
+
+export interface GetAlbumType {
+  getAlbum: Album
+}
+
+export interface GetAlbumVars {
+  albumId: string
+}
+
+export const GET_ALBUM = gql`
+  ${ALBUM_FIELDS}
+  query GetAlbum($albumId: ID!) {
+    getAlbum(albumId: $albumId) {
+      ...AlbumFields
+    }
+  }
+`

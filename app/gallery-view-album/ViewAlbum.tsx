@@ -1,16 +1,20 @@
 import { Stack, Text } from '@chakra-ui/react'
 import { Photos } from 'components'
+import type { Album } from 'graphql/gql'
 
-export const ViewAlbum: React.FC = () => {
+type ViewAlbumProps = {
+  album: Album
+}
+
+export const ViewAlbum: React.FC<ViewAlbumProps> = ({ album }) => {
+  const { photos = [], name = '', description = '' } = album || {}
+
   return (
     <Stack spacing='4'>
       <Text maxW='500px' fontSize='xs' fontWeight='medium'>
-        Have you heard of the critically acclaimed MMORPG Final Fantasy XIV?
-        With an expanded free trial which you can play through the entirety of A
-        Realm Reborn and the award winning Heavensward expansion up to level 60
-        for free with no restrictions on playtime.
+        {description}
       </Text>
-      <Photos />
+      <Photos photos={photos} />
     </Stack>
   )
 }

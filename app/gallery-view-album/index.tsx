@@ -1,16 +1,21 @@
 import { GalleryLayout } from 'layout'
 import { ViewAlbum } from './ViewAlbum'
 import type { NextPage } from 'next'
+import type { Album } from 'graphql/gql'
 
-const ViewAlbumContainer: NextPage = () => {
+type ViewAlbumContainerProps = {
+  album: Album
+}
+
+const ViewAlbumContainer: NextPage<ViewAlbumContainerProps> = ({ album }) => {
   const backPath = {
     label: 'Back to Gallery',
     path: '/',
   }
 
   return (
-    <GalleryLayout pageTitle='FF14 Album' backPath={backPath}>
-      <ViewAlbum />
+    <GalleryLayout pageTitle={album?.name} backPath={backPath}>
+      <ViewAlbum album={album} />
     </GalleryLayout>
   )
 }
