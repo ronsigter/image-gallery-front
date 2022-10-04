@@ -11,14 +11,10 @@ import {
   Text,
   Textarea,
 } from '@chakra-ui/react'
-import { CREATE_PHOTO_ALBUM, LIST_ALBUMS, LIST_PHOTOS } from 'graphql/gql'
+import { CREATE_PHOTO_ALBUM, LIST_ALBUMS } from 'graphql/gql'
 import { useRouter } from 'next/router'
 import { useForm, Controller } from 'react-hook-form'
-import type {
-  CreatePhotoAlbumType,
-  CreatePhotoAlbumVars,
-  ListPhotosType,
-} from 'graphql/gql'
+import type { CreatePhotoAlbumType, CreatePhotoAlbumVars } from 'graphql/gql'
 import { CheckboxSelection } from 'components/CheckboxSelection'
 import { BlankState, LoadingState, PhotoCard } from 'components'
 import { usePhotos } from 'hooks'

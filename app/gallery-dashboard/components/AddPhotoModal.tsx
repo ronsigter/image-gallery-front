@@ -8,7 +8,6 @@ import {
   ModalBody,
   ModalCloseButton,
   Button,
-  Box,
   ModalProps,
 } from '@chakra-ui/react'
 import {
@@ -17,20 +16,34 @@ import {
   UploadPhotoVars,
   UPLOAD_PHOTO,
 } from 'graphql/gql'
+import { useForm } from 'react-hook-form'
+import { DropzoneFields } from './DropzoneFields'
+
+type FormProps = {
+  file: File
+}
 
 export const AddPhotoModal: React.FC<Omit<ModalProps, 'children'>> = (
   props
 ) => {
-  const [onUploadPhoto, { loading }] = useMutation<
-    UploadPhotoType,
-    UploadPhotoVars
-  >(UPLOAD_PHOTO)
+  const {
+    control,
+    handleSubmit,
+    formState: { isSubmitting },
+    watch,
+  } = useForm<FormProps>()
+  const [onUploadPhoto] = useMutation<UploadPhotoType, UploadPhotoVars>(
+    UPLOAD_PHOTO
+  )
+  const file = watch('file', undefined)
 
-  const handleOnSubmit = async (): Promise<void> => {
+  const handleOnSubmit = async (form: FormProps): Promise<void> => {
+    console.log(form)
+
     await onUploadPhoto({
       variables: {
-        name: 'Client Image',
-        type: 'image/jpg',
+        name: form.file.name,
+        type: form.file.type,
       },
       refetchQueries: [{ query: LIST_PHOTOS }],
     })
@@ -42,19 +55,25 @@ export const AddPhotoModal: React.FC<Omit<ModalProps, 'children'>> = (
     <Modal {...props}>
       <ModalOverlay />
       <ModalContent maxW='3xl'>
-        <ModalHeader>Add Photos</ModalHeader>
+        <ModalHeader>Add a Photo</ModalHeader>
         <ModalCloseButton />
-        <ModalBody>
-          <Box w='100%' h='590px' bgColor='#D9D9D9' />
+        <ModalBody
+          as='form'
+          id='upload-file-form'
+          onSubmit={handleSubmit(handleOnSubmit)}
+        >
+          <DropzoneFields name='file' control={control} />
         </ModalBody>
         <ModalFooter>
-          <Button mr={3} onClick={props.onClose} isDisabled={loading}>
+          <Button mr={3} onClick={props.onClose} isDisabled={isSubmitting}>
             Cancel
           </Button>
           <Button
-            isLoading={loading}
+            isLoading={isSubmitting}
             loadingText='Uploading...'
-            onClick={handleOnSubmit}
+            type='submit'
+            form='upload-file-form'
+            isDisabled={!file}
           >
             Done
           </Button>
