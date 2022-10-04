@@ -11,19 +11,21 @@ import {
   Text,
   Textarea,
 } from '@chakra-ui/react'
-import { Photos } from 'components'
 import { CREATE_PHOTO_ALBUM, LIST_ALBUMS, LIST_PHOTOS } from 'graphql/gql'
 import { useRouter } from 'next/router'
-import { useForm } from 'react-hook-form'
+import { useForm, Controller } from 'react-hook-form'
 import type {
   CreatePhotoAlbumType,
   CreatePhotoAlbumVars,
   ListPhotosType,
 } from 'graphql/gql'
+import { CheckboxSelection } from 'components/CheckboxSelection'
+import { PhotoCard } from 'components'
 
 type FormProps = {
   name: string
   description: string
+  photoIds: string[]
 }
 
 export const CreateAlbum: React.FC = () => {
@@ -37,6 +39,7 @@ export const CreateAlbum: React.FC = () => {
   const {
     register,
     handleSubmit,
+    control,
     formState: { isSubmitting, isValid },
   } = useForm<FormProps>({
     mode: 'onChange',
@@ -96,7 +99,21 @@ export const CreateAlbum: React.FC = () => {
         </Flex>
       </Flex>
       <Box>
-        <Photos photos={photos} />
+        <Controller
+          control={control}
+          name='photoIds'
+          render={({ field }) => (
+            <CheckboxSelection
+              checkboxGroupProps={field}
+              options={photos.map((photo) => ({
+                ...photo,
+                label: photo.name,
+                value: photo.id,
+              }))}
+              component={PhotoCard}
+            />
+          )}
+        />
       </Box>
       <Box py='10'>
         <Button
