@@ -20,7 +20,7 @@ import type {
   ListPhotosType,
 } from 'graphql/gql'
 import { CheckboxSelection } from 'components/CheckboxSelection'
-import { PhotoCard } from 'components'
+import { BlankState, LoadingState, PhotoCard } from 'components'
 
 type FormProps = {
   name: string
@@ -30,7 +30,7 @@ type FormProps = {
 
 export const CreateAlbum: React.FC = () => {
   const router = useRouter()
-  const { data } = useQuery<ListPhotosType>(LIST_PHOTOS)
+  const { data, loading } = useQuery<ListPhotosType>(LIST_PHOTOS)
   const photos = data?.listPhotos || []
   const [onCreatePhotoAlbum] = useMutation<
     CreatePhotoAlbumType,
@@ -115,23 +115,29 @@ export const CreateAlbum: React.FC = () => {
           <Button onClick={handleClearSelected}>Clear All</Button>
         </Flex>
       </Flex>
-      <Box>
-        <Controller
-          control={control}
-          name='photoIds'
-          render={({ field }) => (
-            <CheckboxSelection
-              checkboxGroupProps={{ ...field }}
-              options={photos.map((photo) => ({
-                ...photo,
-                label: photo.name,
-                value: photo.id,
-              }))}
-              component={PhotoCard}
-            />
-          )}
-        />
-      </Box>
+      {loading ? (
+        <LoadingState message='Loading photos...' />
+      ) : photos.length === 0 ? (
+        <BlankState message='No photos found. Upload one.' />
+      ) : (
+        <Box>
+          <Controller
+            control={control}
+            name='photoIds'
+            render={({ field }) => (
+              <CheckboxSelection
+                checkboxGroupProps={{ ...field }}
+                options={photos.map((photo) => ({
+                  ...photo,
+                  label: photo.name,
+                  value: photo.id,
+                }))}
+                component={PhotoCard}
+              />
+            )}
+          />
+        </Box>
+      )}
       <Flex py='10' gap={4} alignItems='center'>
         <Button
           type='submit'
