@@ -41,9 +41,12 @@ export const CreateAlbum: React.FC = () => {
     handleSubmit,
     control,
     formState: { isSubmitting, isValid },
+    watch,
   } = useForm<FormProps>({
     mode: 'onChange',
   })
+
+  const photoIds = watch('photoIds', [])
 
   const OnSubmit = async (form: FormProps) => {
     const { photoIds = [], ...rest } = form
@@ -105,7 +108,7 @@ export const CreateAlbum: React.FC = () => {
           name='photoIds'
           render={({ field }) => (
             <CheckboxSelection
-              checkboxGroupProps={field}
+              checkboxGroupProps={{ ...field }}
               options={photos.map((photo) => ({
                 ...photo,
                 label: photo.name,
@@ -116,7 +119,7 @@ export const CreateAlbum: React.FC = () => {
           )}
         />
       </Box>
-      <Box py='10'>
+      <Flex py='10' gap={4} alignItems='center'>
         <Button
           type='submit'
           isLoading={isSubmitting}
@@ -125,7 +128,9 @@ export const CreateAlbum: React.FC = () => {
         >
           Create Album
         </Button>
-      </Box>
+
+        <Text>{photoIds?.length || 0} Photos Selected</Text>
+      </Flex>
     </Box>
   )
 }

@@ -1,10 +1,4 @@
-import {
-  Grid,
-  GridItem,
-  CheckboxGroupProps,
-  useCheckboxGroup,
-  Flex,
-} from '@chakra-ui/react'
+import { CheckboxGroupProps, useCheckboxGroup, Flex } from '@chakra-ui/react'
 import type { GridProps } from '@chakra-ui/react'
 import { CustomCheckbox } from './CustomCheckbox'
 import { useId } from 'react'
