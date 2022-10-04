@@ -15,14 +15,14 @@ export const PHOTO_FIELD = gql`
   }
 `
 
-export interface ListPhotoType {
-  listPhoto: Photo[]
+export interface ListPhotosType {
+  listPhotos: Photo[]
 }
 
-export const LIST_PHOTO = gql`
+export const LIST_PHOTOS = gql`
   ${PHOTO_FIELD}
-  query ListPhoto {
-    listPhoto {
+  query ListPhotos {
+    listPhotos {
       ...PhotoField
     }
   }

@@ -1,6 +1,11 @@
 import { Box, Image } from '@chakra-ui/react'
+import type { Photo } from 'graphql/gql'
 
-export const PhotoCard: React.FC = () => {
+type PhotoCardProps = {
+  photo: Photo
+}
+
+export const PhotoCard: React.FC<PhotoCardProps> = ({ photo }) => {
   return (
     <Box bgColor='#F5F5F5' borderRadius='lg' overflow='hidden'>
       <Image
