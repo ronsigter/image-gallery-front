@@ -7,7 +7,7 @@ type ViewAlbumProps = {
 }
 
 export const ViewAlbum: React.FC<ViewAlbumProps> = ({ album }) => {
-  const { photos = [], name = '', description = '' } = album || {}
+  const { photos = [], description = '' } = album || {}
 
   return (
     <Stack spacing='4'>

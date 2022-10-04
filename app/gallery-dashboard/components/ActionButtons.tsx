@@ -42,7 +42,9 @@ export const ActionButtons: React.FC = () => {
       <Flex ml='auto' gap='4'>
         <Button onClick={onOpen}>Add Photos</Button>
         <NextLink href='/album/new' passHref>
-          <Button as='a'>Create Album</Button>
+          <Button as='a' role='link'>
+            Create Album
+          </Button>
         </NextLink>
         <AddPhotoModal onClose={onClose} isOpen={isOpen} />
       </Flex>

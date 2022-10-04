@@ -7,7 +7,7 @@ const PhotosVar = makeVar<Photo[]>([])
 
 export const usePhotos = () => {
   const photos = useReactiveVar(PhotosVar)
-  const { loading, data } = useQuery<ListPhotosType>(LIST_PHOTOS, {
+  const { loading } = useQuery<ListPhotosType>(LIST_PHOTOS, {
     onCompleted: (data) => {
       PhotosVar(data?.listPhotos || [])
     },
