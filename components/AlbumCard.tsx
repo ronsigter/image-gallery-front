@@ -8,7 +8,14 @@ type AlbumCardProps = {
 
 export const AlbumCard: React.FC<AlbumCardProps> = ({ album }) => {
   return (
-    <Box bgColor='#F5F5F5' py='1.125rem' px='0.875rem' borderRadius='lg'>
+    <Box
+      bgColor='#F5F5F5'
+      py='1.125rem'
+      px='0.875rem'
+      borderRadius='lg'
+      role='presentation'
+      aria-label='album-card'
+    >
       <Image
         alt='photo-card'
         bgColor='#D3D3D3'

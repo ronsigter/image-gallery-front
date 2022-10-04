@@ -14,6 +14,8 @@ export const LoadingState: React.FC<LoadingStateProps> = ({ message }) => {
       alignItems='center'
       gap={3}
       py={20}
+      role='presentation'
+      aria-label='loading-state'
     >
       <Spinner size='xl' />
       <Text as='i' fontSize={12}>

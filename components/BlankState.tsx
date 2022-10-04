@@ -14,6 +14,8 @@ export const BlankState: React.FC<BlankStateProps> = ({ message }) => {
       alignItems='center'
       gap={3}
       py={10}
+      role='presentation'
+      aria-label='blank-state'
     >
       <Text as='i' fontSize={12}>
         {message}

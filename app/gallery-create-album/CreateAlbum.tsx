@@ -22,7 +22,6 @@ import type {
 import { CheckboxSelection } from 'components/CheckboxSelection'
 import { BlankState, LoadingState, PhotoCard } from 'components'
 import { usePhotos } from 'hooks'
-import { useState } from 'react'
 
 type FormProps = {
   name: string
@@ -59,7 +58,6 @@ export const CreateAlbum: React.FC = () => {
       },
       refetchQueries: [{ query: LIST_ALBUMS }],
     })
-
     router.push('/')
   }
 
@@ -155,7 +153,9 @@ export const CreateAlbum: React.FC = () => {
           Create Album
         </Button>
 
-        <Text>{photoIds?.length || 0} Photos Selected</Text>
+        <Text role='presentation' aria-label='selection-counter'>
+          {photoIds?.length || 0} Photos Selected
+        </Text>
       </Flex>
     </Box>
   )

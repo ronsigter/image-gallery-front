@@ -20,8 +20,8 @@ export const GalleryLayout: React.FC<GalleryLayoutProps> = ({
       <Stack spacing='6' pb='9'>
         {backPath && (
           <Box>
-            <NextLink href={backPath.path}>
-              <Link fontWeight='semibold' fontSize='x-small'>
+            <NextLink href={backPath.path} passHref>
+              <Link fontWeight='semibold' fontSize='x-small' role='link'>
                 {backPath.label}
               </Link>
             </NextLink>
