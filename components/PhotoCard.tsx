@@ -26,6 +26,8 @@ export const PhotoCard: React.FC<PhotoCardProps> = ({
         h='150px'
         w='150px'
         borderRadius='lg'
+        objectFit='cover'
+        fallbackSrc='/no-image.png'
       />
     </Box>
   )

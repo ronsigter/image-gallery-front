@@ -23,6 +23,8 @@ export const AlbumCard: React.FC<AlbumCardProps> = ({ album }) => {
         w='150px'
         borderRadius='lg'
         overflow='hidden'
+        objectFit='cover'
+        fallbackSrc='/no-image.png'
       />
       <Stack spacing='1' pt='2'>
         <Text fontSize='xs' fontWeight='medium'>
