@@ -33,3 +33,24 @@ export const LIST_ALBUMS = gql`
     }
   }
 `
+
+export interface CreatePhotoAlbumType {
+  createPhotoAlbum: Album
+}
+
+export interface CreatePhotoAlbumVars {
+  album: {
+    name: string
+    description: string
+  }
+  photoIds: string[]
+}
+
+export const CREATE_PHOTO_ALBUM = gql`
+  ${ALBUM_FIELDS}
+  mutation CreatePhotoAlbum($album: AlbumInput!, $photoIds: [String]!) {
+    createPhotoAlbum(album: $album, photoIds: $photoIds) {
+      ...AlbumFields
+    }
+  }
+`

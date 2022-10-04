@@ -1,3 +1,4 @@
+import { useMutation, useQuery } from '@apollo/client'
 import {
   Box,
   Button,
@@ -11,8 +12,38 @@ import {
   Textarea,
 } from '@chakra-ui/react'
 import { Photos } from 'components'
+import { CREATE_PHOTO_ALBUM, LIST_ALBUMS, LIST_PHOTOS } from 'graphql/gql'
+import type {
+  CreatePhotoAlbumType,
+  CreatePhotoAlbumVars,
+  ListPhotosType,
+} from 'graphql/gql'
+import { useRouter } from 'next/router'
 
 export const CreateAlbum: React.FC = () => {
+  const router = useRouter()
+  const { data } = useQuery<ListPhotosType>(LIST_PHOTOS)
+  const photos = data?.listPhotos || []
+  const [onCreatePhotoAlbum, { loading }] = useMutation<
+    CreatePhotoAlbumType,
+    CreatePhotoAlbumVars
+  >(CREATE_PHOTO_ALBUM)
+
+  const handleOnSubmit = async () => {
+    await onCreatePhotoAlbum({
+      variables: {
+        album: {
+          name: 'Client Album',
+          description: 'this is a test album',
+        },
+        photoIds: [],
+      },
+      refetchQueries: [{ query: LIST_ALBUMS }],
+    })
+
+    router.push('/')
+  }
+
   return (
     <Box>
       <Box maxW='426px'>
@@ -45,7 +76,16 @@ export const CreateAlbum: React.FC = () => {
         </Flex>
       </Flex>
       <Box>
-        <Photos />
+        <Photos photos={photos} />
+      </Box>
+      <Box py='10'>
+        <Button
+          onClick={handleOnSubmit}
+          isLoading={loading}
+          loadingText='Creating album...'
+        >
+          Create Album
+        </Button>
       </Box>
     </Box>
   )
