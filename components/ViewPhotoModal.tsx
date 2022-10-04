@@ -10,21 +10,25 @@ import {
   Box,
   ModalProps,
 } from '@chakra-ui/react'
+import type { Photo } from 'graphql/gql'
 
-export const ViewPhotoModal: React.FC<Omit<ModalProps, 'children'>> = (
-  props
-) => {
+interface ViewPhotoModalProps extends Omit<ModalProps, 'children'> {
+  photo: Photo | null
+}
+
+export const ViewPhotoModal: React.FC<ViewPhotoModalProps> = (props) => {
+  const { photo = null, ...rest } = props
   return (
-    <Modal {...props}>
+    <Modal {...rest}>
       <ModalOverlay />
       <ModalContent maxW='3xl'>
-        <ModalHeader>Image Name</ModalHeader>
+        <ModalHeader>{photo?.name || '---'}</ModalHeader>
         <ModalCloseButton />
         <ModalBody>
           <Box w='100%' h='590px' bgColor='#D9D9D9' />
         </ModalBody>
         <ModalFooter>
-          <Button mr={3} onClick={props.onClose}>
+          <Button mr={3} onClick={rest.onClose}>
             Close Preview
           </Button>
         </ModalFooter>
