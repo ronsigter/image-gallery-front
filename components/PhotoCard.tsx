@@ -10,7 +10,6 @@ export const PhotoCard: React.FC<PhotoCardProps> = ({
   photo,
   isChecked = false,
 }) => {
-  console.log('isChecked', isChecked)
   return (
     <Box
       bgColor='#F5F5F5'

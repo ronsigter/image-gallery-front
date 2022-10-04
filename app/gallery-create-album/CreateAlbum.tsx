@@ -46,10 +46,11 @@ export const CreateAlbum: React.FC = () => {
   })
 
   const OnSubmit = async (form: FormProps) => {
+    const { photoIds = [], ...rest } = form
     await onCreatePhotoAlbum({
       variables: {
-        album: { ...form },
-        photoIds: [],
+        album: { ...rest },
+        photoIds,
       },
       refetchQueries: [{ query: LIST_ALBUMS }],
     })
