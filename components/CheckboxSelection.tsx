@@ -29,7 +29,7 @@ export const CheckboxSelection = <T extends RequiredOptions>(
   const { getCheckboxProps } = useCheckboxGroup(checkboxGroupProps)
 
   return (
-    <Flex gap='3' wrap='wrap'>
+    <Flex gap={{ base: '1', md: '3' }} wrap='wrap' justifyContent='center'>
       {options.map((option) => {
         const { value } = option
         const checkbox = getCheckboxProps({ value })

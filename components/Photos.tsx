@@ -17,7 +17,7 @@ export const Photos: React.FC<PhotosProps> = ({ photos }) => {
   }
 
   return (
-    <Flex gap='3' wrap='wrap'>
+    <Flex gap={{ base: '1', md: '3' }} wrap='wrap' justifyContent='center'>
       {photos.map((photo) => (
         <Box
           key={photo.id}

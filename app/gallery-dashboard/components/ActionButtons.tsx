@@ -28,8 +28,21 @@ export const ActionButtons: React.FC = () => {
   }
 
   return (
-    <Flex alignItems='center'>
-      <Flex gap='4'>
+    <Flex
+      alignItems='center'
+      flexDir={{
+        base: 'column',
+        md: 'row',
+      }}
+      gap={4}
+    >
+      <Flex
+        gap='4'
+        flexDir={{
+          base: 'column',
+          md: 'row',
+        }}
+      >
         <Input placeholder='Search Album' onChange={handleSearch} />
         <Flex gap='1' w='100%' alignItems='center'>
           <FormLabel w='100%'>Sort by:</FormLabel>
@@ -39,7 +52,13 @@ export const ActionButtons: React.FC = () => {
           </Select>
         </Flex>
       </Flex>
-      <Flex ml='auto' gap='4'>
+      <Flex
+        ml={{
+          base: '0',
+          md: 'auto',
+        }}
+        gap='4'
+      >
         <Button onClick={onOpen}>Add Photos</Button>
         <NextLink href='/album/new' passHref>
           <Button as='a' role='link'>
