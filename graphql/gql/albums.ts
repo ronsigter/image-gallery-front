@@ -7,6 +7,7 @@ export interface Album {
   name: string
   description: string
   photos: Photo[]
+  insertedAt: string
 }
 
 export const ALBUM_FIELDS = gql`
@@ -18,6 +19,7 @@ export const ALBUM_FIELDS = gql`
     photos {
       ...PhotoField
     }
+    insertedAt
   }
 `
 

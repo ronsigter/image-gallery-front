@@ -5,6 +5,7 @@ export interface Photo {
   id: string
   name: string
   type: string
+  insertedAt: string
 }
 
 export const PHOTO_FIELD = gql`
@@ -12,6 +13,7 @@ export const PHOTO_FIELD = gql`
     id
     name
     type
+    insertedAt
   }
 `
 
