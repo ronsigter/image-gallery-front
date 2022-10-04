@@ -13,7 +13,7 @@ export const Albums: React.FC = () => {
     return <BlankState message='No albums found. Create one.' />
 
   return (
-    <Flex gap='3' wrap='wrap'>
+    <Flex gap={{ base: '1', md: '3' }} wrap='wrap' justifyContent='center'>
       {albums.map((album) => (
         <NextLink href={`/album/${album.id}`} key={album.id} passHref>
           <Link textDecoration='none' _hover={{}}>
