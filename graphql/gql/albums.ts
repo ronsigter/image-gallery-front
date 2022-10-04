@@ -6,7 +6,7 @@ export interface Album {
   id: string
   name: string
   description: string
-  photos: Photo
+  photos: Photo[]
 }
 
 export const ALBUM_FIELDS = gql`

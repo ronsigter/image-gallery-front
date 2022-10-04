@@ -6,21 +6,28 @@ import { ListAlbumsType, LIST_ALBUMS } from 'graphql/gql'
 
 export const Albums: React.FC = () => {
   const { data } = useQuery<ListAlbumsType>(LIST_ALBUMS)
-
-  console.log(data)
+  const albums = data?.listAlbums || []
 
   return (
     <Flex gap='3' wrap='wrap'>
-      {Array.from({ length: 20 }).map((_arr, i) => (
-        <NextLink href={`/album/${i}`} key={i} passHref>
+      {albums.map((album) => (
+        <NextLink href={`/album/${album.id}`} key={album.id} passHref>
           <Link textDecoration='none' _hover={{}}>
-            <AlbumCard key={i} />
+            <AlbumCard album={album} />
           </Link>
         </NextLink>
       ))}
       <NextLink href={`/photos`} passHref>
         <Link textDecoration='none' _hover={{}}>
-          <AlbumCard />
+          <AlbumCard
+            album={{
+              id: 'view-all-card',
+              __typename: 'Album',
+              description: 'View more',
+              name: 'VIEW ALL',
+              photos: [],
+            }}
+          />
         </Link>
       </NextLink>
     </Flex>
