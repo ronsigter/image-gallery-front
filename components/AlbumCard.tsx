@@ -23,7 +23,7 @@ export const AlbumCard: React.FC<AlbumCardProps> = ({ album }) => {
         <Flex>
           <Text fontSize='x-small'>{album?.photos.length || 0} Photos</Text>
           <Text fontSize='x-small' ml='auto'>
-            6/15/2022
+            {album?.insertedAt || '---'}
           </Text>
         </Flex>
       </Stack>

@@ -1,5 +1,6 @@
 import { makeVar, useQuery, useReactiveVar } from '@apollo/client'
 import { LIST_ALBUMS } from 'graphql/gql'
+import { compareAsc } from 'date-fns'
 import type { Album, ListAlbumsType } from 'graphql/gql'
 
 const AlbumsVar = makeVar<Album[]>([])
@@ -12,18 +13,22 @@ export const useAlbums = () => {
     },
   })
 
-  const sortAlbums = (albumsData: Album[]): { [key: string]: Album[] } => ({
-    name: albumsData.sort((a, b) =>
-      a.name > b.name ? 1 : b.name > a.name ? -1 : 0
-    ),
-    createdDate: albumsData.sort((a, b) =>
-      a.name > b.name ? 1 : b.name > a.name ? -1 : 0
-    ),
+  const sortAlbums = (
+    albumsData: Album[]
+  ): { [key: string]: () => Album[] } => ({
+    name: () =>
+      albumsData.sort((a, b) =>
+        a.name > b.name ? 1 : b.name > a.name ? -1 : 0
+      ),
+    createdDate: () =>
+      albumsData.sort((a, b) =>
+        compareAsc(new Date(a.insertedAt), new Date(b.insertedAt))
+      ),
   })
 
   const sortBy = (sort: string): void => {
     const albumsData = [...albums]
-    const sortedAlbums = sortAlbums(albumsData)[sort]
+    const sortedAlbums = sortAlbums(albumsData)[sort]?.() || []
     AlbumsVar(sortedAlbums)
   }
 
@@ -32,7 +37,7 @@ export const useAlbums = () => {
     const filteredAlbums = albumsData.filter(({ name }) =>
       name.toLocaleLowerCase().includes(term.toLocaleLowerCase())
     )
-    const sortedAlbums = sortAlbums(filteredAlbums)[sort] || []
+    const sortedAlbums = sortAlbums(filteredAlbums)[sort]?.() || []
     AlbumsVar(sortedAlbums)
   }
 
