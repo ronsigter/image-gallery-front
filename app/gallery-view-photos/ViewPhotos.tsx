@@ -1,11 +1,9 @@
-import { useQuery } from '@apollo/client'
 import { Box } from '@chakra-ui/react'
 import { BlankState, LoadingState, Photos } from 'components'
-import { ListPhotosType, LIST_PHOTOS } from 'graphql/gql'
+import { usePhotos } from 'hooks'
 
 export const ViewPhotos: React.FC = () => {
-  const { data, loading } = useQuery<ListPhotosType>(LIST_PHOTOS)
-  const photos = data?.listPhotos || []
+  const { photos, loading } = usePhotos()
 
   if (loading) return <LoadingState message='Loading photos...' />
 

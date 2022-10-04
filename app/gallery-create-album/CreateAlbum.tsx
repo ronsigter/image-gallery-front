@@ -21,6 +21,8 @@ import type {
 } from 'graphql/gql'
 import { CheckboxSelection } from 'components/CheckboxSelection'
 import { BlankState, LoadingState, PhotoCard } from 'components'
+import { usePhotos } from 'hooks'
+import { useState } from 'react'
 
 type FormProps = {
   name: string
@@ -30,8 +32,7 @@ type FormProps = {
 
 export const CreateAlbum: React.FC = () => {
   const router = useRouter()
-  const { data, loading } = useQuery<ListPhotosType>(LIST_PHOTOS)
-  const photos = data?.listPhotos || []
+  const { photos, loading, sortPhotosBy } = usePhotos()
   const [onCreatePhotoAlbum] = useMutation<
     CreatePhotoAlbumType,
     CreatePhotoAlbumVars
@@ -74,6 +75,12 @@ export const CreateAlbum: React.FC = () => {
     })
   }
 
+  const handleOnChangeSort = (
+    e: React.ChangeEvent<HTMLSelectElement>
+  ): void => {
+    sortPhotosBy(e.target.value)
+  }
+
   return (
     <Box as='form' onSubmit={handleSubmit(OnSubmit)}>
       <Box maxW='426px'>
@@ -105,9 +112,9 @@ export const CreateAlbum: React.FC = () => {
       <Flex pb='4' pt='6'>
         <Flex gap='2' alignItems='center'>
           <Text minW='100px'>Sort by:</Text>
-          <Select w='100%'>
-            <option value='option1'>Name</option>
-            <option value='option2'>Date Created</option>
+          <Select w='100%' onChange={handleOnChangeSort}>
+            <option value='name'>Name</option>
+            <option value='createdDate'>Created At</option>
           </Select>
         </Flex>
         <Flex ml='auto' gap='2'>

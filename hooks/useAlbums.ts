@@ -1,5 +1,6 @@
-import { Album, ListAlbumsType, LIST_ALBUMS } from 'graphql/gql'
 import { makeVar, useQuery, useReactiveVar } from '@apollo/client'
+import { LIST_ALBUMS } from 'graphql/gql'
+import type { Album, ListAlbumsType } from 'graphql/gql'
 
 const AlbumsVar = makeVar<Album[]>([])
 
