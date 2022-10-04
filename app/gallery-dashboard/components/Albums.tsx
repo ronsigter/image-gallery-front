@@ -12,6 +12,11 @@ export const Albums: React.FC = () => {
           </Link>
         </NextLink>
       ))}
+      <NextLink href={`/photos`} passHref>
+        <Link textDecoration='none' _hover={{}}>
+          <AlbumCard />
+        </Link>
+      </NextLink>
     </Flex>
   )
 }
