@@ -1,12 +1,10 @@
 import NextLink from 'next/link'
 import { Link, Flex } from '@chakra-ui/react'
 import { AlbumCard, BlankState, LoadingState } from 'components'
-import { useQuery } from '@apollo/client'
-import { ListAlbumsType, LIST_ALBUMS } from 'graphql/gql'
+import { useAlbums } from 'hooks'
 
 export const Albums: React.FC = () => {
-  const { data, loading } = useQuery<ListAlbumsType>(LIST_ALBUMS)
-  const albums = data?.listAlbums || []
+  const { albums, loading } = useAlbums()
 
   if (loading) return <LoadingState message='Loading albums...' />
 
