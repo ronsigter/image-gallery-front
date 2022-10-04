@@ -23,7 +23,9 @@ export const CustomCheckbox: React.FC<CheckboxCardProps> = (props) => {
     // Checking isValidElement is the safe way and avoids a typescript
     // error too.
     if (React.isValidElement(child)) {
-      return React.cloneElement(child, { isChecked: state.isChecked })
+      return React.cloneElement(child as React.ReactElement<any>, {
+        isChecked: state.isChecked,
+      })
     }
     return child
   })
