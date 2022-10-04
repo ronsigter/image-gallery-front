@@ -27,3 +27,21 @@ export const LIST_PHOTOS = gql`
     }
   }
 `
+
+export interface UploadPhotoType {
+  uploadPhoto: Photo
+}
+
+export interface UploadPhotoVars {
+  name: string
+  type: string
+}
+
+export const UPLOAD_PHOTO = gql`
+  ${PHOTO_FIELD}
+  mutation UploadPhoto($name: String!, $type: String!) {
+    uploadPhoto(name: $name, type: $type) {
+      ...PhotoField
+    }
+  }
+`
