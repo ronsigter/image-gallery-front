@@ -13,29 +13,39 @@ import {
 } from '@chakra-ui/react'
 import { Photos } from 'components'
 import { CREATE_PHOTO_ALBUM, LIST_ALBUMS, LIST_PHOTOS } from 'graphql/gql'
+import { useRouter } from 'next/router'
+import { useForm } from 'react-hook-form'
 import type {
   CreatePhotoAlbumType,
   CreatePhotoAlbumVars,
   ListPhotosType,
 } from 'graphql/gql'
-import { useRouter } from 'next/router'
+
+type FormProps = {
+  name: string
+  description: string
+}
 
 export const CreateAlbum: React.FC = () => {
   const router = useRouter()
   const { data } = useQuery<ListPhotosType>(LIST_PHOTOS)
   const photos = data?.listPhotos || []
-  const [onCreatePhotoAlbum, { loading }] = useMutation<
+  const [onCreatePhotoAlbum] = useMutation<
     CreatePhotoAlbumType,
     CreatePhotoAlbumVars
   >(CREATE_PHOTO_ALBUM)
+  const {
+    register,
+    handleSubmit,
+    formState: { isSubmitting, isValid },
+  } = useForm<FormProps>({
+    mode: 'onChange',
+  })
 
-  const handleOnSubmit = async () => {
+  const OnSubmit = async (form: FormProps) => {
     await onCreatePhotoAlbum({
       variables: {
-        album: {
-          name: 'Client Album',
-          description: 'this is a test album',
-        },
+        album: { ...form },
         photoIds: [],
       },
       refetchQueries: [{ query: LIST_ALBUMS }],
@@ -45,20 +55,30 @@ export const CreateAlbum: React.FC = () => {
   }
 
   return (
-    <Box>
+    <Box as='form' onSubmit={handleSubmit(OnSubmit)}>
       <Box maxW='426px'>
         <Stack spacing='2'>
           <FormControl>
             <FormLabel fontSize='x-small' fontWeight='medium'>
               Name
             </FormLabel>
-            <Input fontSize='xs' />
+            <Input
+              fontSize='xs'
+              {...register('name', {
+                required: true,
+              })}
+            />
           </FormControl>
           <FormControl>
             <FormLabel fontSize='x-small' fontWeight='medium'>
               Description
             </FormLabel>
-            <Textarea fontSize='xs' />
+            <Textarea
+              fontSize='xs'
+              {...register('description', {
+                required: true,
+              })}
+            />
           </FormControl>
         </Stack>
       </Box>
@@ -80,9 +100,10 @@ export const CreateAlbum: React.FC = () => {
       </Box>
       <Box py='10'>
         <Button
-          onClick={handleOnSubmit}
-          isLoading={loading}
+          type='submit'
+          isLoading={isSubmitting}
           loadingText='Creating album...'
+          isDisabled={!isValid}
         >
           Create Album
         </Button>
