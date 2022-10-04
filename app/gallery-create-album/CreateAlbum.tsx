@@ -42,6 +42,7 @@ export const CreateAlbum: React.FC = () => {
     control,
     formState: { isSubmitting, isValid },
     watch,
+    resetField,
   } = useForm<FormProps>({
     mode: 'onChange',
   })
@@ -59,6 +60,18 @@ export const CreateAlbum: React.FC = () => {
     })
 
     router.push('/')
+  }
+
+  const handleClearSelected = (): void => {
+    resetField('photoIds', {
+      defaultValue: [],
+    })
+  }
+
+  const handleSelectAll = (): void => {
+    resetField('photoIds', {
+      defaultValue: photos?.map(({ id }) => id) || [],
+    })
   }
 
   return (
@@ -98,8 +111,8 @@ export const CreateAlbum: React.FC = () => {
           </Select>
         </Flex>
         <Flex ml='auto' gap='2'>
-          <Button>Select All</Button>
-          <Button>Clear All</Button>
+          <Button onClick={handleSelectAll}>Select All</Button>
+          <Button onClick={handleClearSelected}>Clear All</Button>
         </Flex>
       </Flex>
       <Box>
