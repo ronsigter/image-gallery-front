@@ -32,21 +32,34 @@ export const ActionButtons: React.FC = () => {
       alignItems='center'
       flexDir={{
         base: 'column',
-        md: 'row',
+        lg: 'row',
       }}
       gap={4}
+      w='100%'
     >
       <Flex
         gap='4'
         flexDir={{
           base: 'column',
-          md: 'row',
+          lg: 'row',
         }}
+        w='100%'
       >
-        <Input placeholder='Search Album' onChange={handleSearch} />
-        <Flex gap='1' w='100%' alignItems='center'>
-          <FormLabel w='100%'>Sort by:</FormLabel>
-          <Select w='100%' onChange={handleOnChangeSort}>
+        <Input
+          placeholder='Search Album'
+          onChange={handleSearch}
+          maxW={{ base: 'unset', lg: '30%' }}
+        />
+        <Flex
+          gap='1'
+          w='100%'
+          alignItems='center'
+          maxW={{ base: 'unset', lg: '30%' }}
+        >
+          <FormLabel w='20%' minW='100px'>
+            Sort by:
+          </FormLabel>
+          <Select w='80%' minW='200px' onChange={handleOnChangeSort}>
             <option value='name'>Name</option>
             <option value='createdDate'>Date Created</option>
           </Select>

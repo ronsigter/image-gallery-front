@@ -52,9 +52,9 @@ export const AddPhotoModal: React.FC<Omit<ModalProps, 'children'>> = (
   }
 
   return (
-    <Modal {...props}>
+    <Modal isCentered {...props}>
       <ModalOverlay />
-      <ModalContent maxW='3xl'>
+      <ModalContent maxW={{ base: 'lg', md: '3xl' }}>
         <ModalHeader>Add a Photo</ModalHeader>
         <ModalCloseButton />
         <ModalBody

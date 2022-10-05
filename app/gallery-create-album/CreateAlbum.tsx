@@ -77,7 +77,7 @@ export const CreateAlbum: React.FC = () => {
 
   return (
     <Box as='form' onSubmit={handleSubmit(OnSubmit)}>
-      <Box maxW='426px'>
+      <Box maxW={{ base: '100%', md: '426px' }}>
         <Stack spacing='2'>
           <FormControl>
             <FormLabel fontSize='x-small' fontWeight='medium'>
@@ -103,15 +103,37 @@ export const CreateAlbum: React.FC = () => {
           </FormControl>
         </Stack>
       </Box>
-      <Flex pb='4' pt='6'>
-        <Flex gap='2' alignItems='center'>
-          <Text minW='100px'>Sort by:</Text>
-          <Select w='100%' onChange={handleOnChangeSort}>
+      <Flex
+        pb='4'
+        pt='6'
+        gap='4'
+        flexDir={{
+          base: 'column',
+          md: 'row',
+        }}
+        w='100%'
+      >
+        <Flex
+          gap='1'
+          w='100%'
+          alignItems='center'
+          maxW={{ base: 'unset', lg: '30%' }}
+        >
+          <Text w='20%' minW='100px'>
+            Sort by:
+          </Text>
+          <Select w='80%' minW='200px' onChange={handleOnChangeSort}>
             <option value='name'>Name</option>
             <option value='createdDate'>Created At</option>
           </Select>
         </Flex>
-        <Flex ml='auto' gap='2'>
+        <Flex
+          ml={{
+            base: '0',
+            md: 'auto',
+          }}
+          gap='2'
+        >
           <Button onClick={handleSelectAll}>Select All</Button>
           <Button onClick={handleClearSelected}>Clear All</Button>
         </Flex>

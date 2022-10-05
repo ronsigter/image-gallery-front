@@ -1,5 +1,5 @@
 import { Stack, Text } from '@chakra-ui/react'
-import { Photos } from 'components'
+import { BlankState, Photos } from 'components'
 import type { Album } from 'graphql/gql'
 
 type ViewAlbumProps = {
@@ -14,7 +14,11 @@ export const ViewAlbum: React.FC<ViewAlbumProps> = ({ album }) => {
       <Text maxW='500px' fontSize='xs' fontWeight='medium'>
         {description}
       </Text>
-      <Photos photos={photos} />
+      {photos.length === 0 ? (
+        <BlankState message='No photos found' />
+      ) : (
+        <Photos photos={photos} />
+      )}
     </Stack>
   )
 }

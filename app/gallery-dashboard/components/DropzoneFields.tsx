@@ -54,7 +54,7 @@ const Dropzone: React.FC<any> = ({
   return (
     <Center
       w='100%'
-      h='590px'
+      h={{ base: '70vw', md: '500px' }}
       bgColor='#D9D9D9'
       borderRadius='xl'
       overflow='hidden'
@@ -63,7 +63,9 @@ const Dropzone: React.FC<any> = ({
     >
       <Input {...getInputProps({ onChange })} />
       {files.length === 0 ? (
-        <Text>Drag and drop some file here, or click to select a file</Text>
+        <Text textAlign='center' px='2'>
+          Drag and drop some file here, or click to select a file
+        </Text>
       ) : (
         <Box p='1'>
           <Image
