@@ -1,4 +1,16 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+## Image Gallery
+
+Live demo: https://sp-image-gallery.vercel.app/
+
+## Libraries
+
+- [x] Chakra-UI as component library
+- [x] NextJS as ReactJS Framework
+- [x] React-hook-form for form management
+- [x] Apollo Client GraphQL for GraphQL client and Statemanagement
+- [x] React-Dropzone for file uploads handler
+- [x] Jest with React-Testing-Library for unit/integration tests
+- [x] Date-fns for time readability and date-time utilities
 
 ## Getting Started
 
