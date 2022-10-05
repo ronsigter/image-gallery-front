@@ -30,7 +30,7 @@ export const PhotoCard: React.FC<PhotoCardProps> = ({
         borderRadius='lg'
         objectFit='cover'
         fallbackSrc='/no-image.png'
-        src={`${BUCKET_URL}${photo.name}`}
+        src={`${BUCKET_URL}${photo?.name}`}
       />
     </Box>
   )
