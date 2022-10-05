@@ -6,7 +6,7 @@ type Data = {
   url?: string
 }
 
-const AWS_BUCKET_NAME = process.env.AWS_BUCKET_NAME
+const AWS_S3_BUCKET_NAME = process.env.AWS_S3_BUCKET_NAME
 
 export default async function handler(
   req: NextApiRequest,
@@ -20,7 +20,7 @@ export default async function handler(
     let { name, type } = req.body
 
     const fileParams = {
-      Bucket: AWS_BUCKET_NAME,
+      Bucket: AWS_S3_BUCKET_NAME,
       Key: name,
       ContentType: type,
     }

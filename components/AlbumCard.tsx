@@ -6,6 +6,8 @@ type AlbumCardProps = {
   album: Album
 }
 
+const BUCKET_URL = process.env.BUCKET_URL
+
 export const AlbumCard: React.FC<AlbumCardProps> = ({ album }) => {
   return (
     <Box
@@ -25,6 +27,7 @@ export const AlbumCard: React.FC<AlbumCardProps> = ({ album }) => {
         overflow='hidden'
         objectFit='cover'
         fallbackSrc='/no-image.png'
+        src={`${BUCKET_URL}${album?.photos?.at(-1)?.name}`}
       />
       <Stack spacing='1' pt='2'>
         <Text fontSize='xs' fontWeight='medium'>

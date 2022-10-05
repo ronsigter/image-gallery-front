@@ -18,6 +18,8 @@ interface ViewPhotoModalProps extends Omit<ModalProps, 'children'> {
   photo: Photo | null
 }
 
+const BUCKET_URL = process.env.BUCKET_URL
+
 export const ViewPhotoModal: React.FC<ViewPhotoModalProps> = (props) => {
   const { photo = null, ...rest } = props
   return (
@@ -42,6 +44,7 @@ export const ViewPhotoModal: React.FC<ViewPhotoModalProps> = (props) => {
               overflow='hidden'
               objectFit='cover'
               fallbackSrc='/no-image.png'
+              src={`${BUCKET_URL}${photo?.name}`}
             />
           </Center>
         </ModalBody>

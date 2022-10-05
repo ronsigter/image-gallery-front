@@ -42,25 +42,31 @@ export const AddPhotoModal: React.FC<Omit<ModalProps, 'children'>> = (
     const formFile = form.file
     delete formFile.preview
 
-    const { data } = await axios.post('/api/upload_photo', {
-      name: formFile.name,
-      type: formFile.type,
-    })
+    try {
+      const { data } = await axios.post('/api/upload_photo', {
+        name: formFile.name,
+        type: formFile.type,
+      })
 
-    const signedUrl = data.url
-    const imageUrl = await axios.put(signedUrl, formFile, {
-      headers: {
-        'Content-Type': formFile.type,
-        'Access-Control-Allow-Origin': '*',
-      },
-    })
-    // await onUploadPhoto({
-    //   variables: {
-    //     name: form.file.name,
-    //     type: form.file.type,
-    //   },
-    //   refetchQueries: [{ query: LIST_PHOTOS }],
-    // })
+      const signedUrl = data.url
+
+      await axios.put(signedUrl, formFile, {
+        headers: {
+          'Content-Type': formFile.type,
+          'Access-Control-Allow-Origin': '*',
+        },
+      })
+
+      await onUploadPhoto({
+        variables: {
+          name: formFile.name,
+          type: formFile.type,
+        },
+        refetchQueries: [{ query: LIST_PHOTOS }],
+      })
+    } catch (error) {
+      console.log('Something Went wrong')
+    }
 
     props.onClose()
   }

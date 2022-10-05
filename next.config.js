@@ -4,6 +4,7 @@ const nextConfig = {
   swcMinify: true,
   env: {
     GRAPHQL_SERVER: process.env.GRAPHQL_SERVER,
+    BUCKET_URL: process.env.BUCKET_URL
   },
 }
 
