@@ -17,10 +17,11 @@ import {
   UPLOAD_PHOTO,
 } from 'graphql/gql'
 import { useForm } from 'react-hook-form'
+import axios from 'axios'
 import { DropzoneFields } from './DropzoneFields'
 
 type FormProps = {
-  file: File
+  file: File & { preview?: string }
 }
 
 export const AddPhotoModal: React.FC<Omit<ModalProps, 'children'>> = (
@@ -38,15 +39,32 @@ export const AddPhotoModal: React.FC<Omit<ModalProps, 'children'>> = (
   const file = watch('file', undefined)
 
   const handleOnSubmit = async (form: FormProps): Promise<void> => {
-    console.log(form)
+    const formFile = form.file
+    delete formFile.preview
 
-    await onUploadPhoto({
-      variables: {
-        name: form.file.name,
-        type: form.file.type,
-      },
-      refetchQueries: [{ query: LIST_PHOTOS }],
+    const { data } = await axios.post('/api/upload_photo', {
+      name: formFile.name,
+      type: formFile.type,
     })
+
+    const signedUrl = data.url
+    console.log(signedUrl)
+    const imageUrl = await axios.put(signedUrl, formFile, {
+      headers: {
+        'Content-Type': formFile.type,
+        'Access-Control-Allow-Origin': '*',
+      },
+    })
+
+    console.log(imageUrl)
+
+    // await onUploadPhoto({
+    //   variables: {
+    //     name: form.file.name,
+    //     type: form.file.type,
+    //   },
+    //   refetchQueries: [{ query: LIST_PHOTOS }],
+    // })
 
     props.onClose()
   }

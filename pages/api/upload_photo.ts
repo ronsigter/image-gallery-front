@@ -22,10 +22,10 @@ export default async function handler(
     const fileParams = {
       Bucket: AWS_BUCKET_NAME,
       Key: name,
-      expires: 600,
       ContentType: type,
-      ACL: 'public-read',
     }
+
+    console.log(fileParams)
 
     const url = await s3.getSignedUrlPromise('putObject', fileParams)
 
