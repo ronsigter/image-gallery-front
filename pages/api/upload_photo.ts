@@ -25,8 +25,6 @@ export default async function handler(
       ContentType: type,
     }
 
-    console.log(fileParams)
-
     const url = await s3.getSignedUrlPromise('putObject', fileParams)
 
     res.status(200).json({ url })

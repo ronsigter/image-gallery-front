@@ -48,16 +48,12 @@ export const AddPhotoModal: React.FC<Omit<ModalProps, 'children'>> = (
     })
 
     const signedUrl = data.url
-    console.log(signedUrl)
     const imageUrl = await axios.put(signedUrl, formFile, {
       headers: {
         'Content-Type': formFile.type,
         'Access-Control-Allow-Origin': '*',
       },
     })
-
-    console.log(imageUrl)
-
     // await onUploadPhoto({
     //   variables: {
     //     name: form.file.name,
