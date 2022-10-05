@@ -151,7 +151,7 @@ export const CreateAlbum: React.FC = () => {
               <CheckboxSelection
                 checkboxGroupProps={{ ...field }}
                 options={photos.map((photo) => ({
-                  ...photo,
+                  photo: photo,
                   label: photo.name,
                   value: photo.id,
                 }))}
