@@ -1,5 +1,7 @@
 ## Image Gallery
 
+![image-gallery](https://github.com/ronsigter/image-gallery-front/blob/main/public/image-gallery.png?raw=true)
+
 Live demo: https://sp-image-gallery.vercel.app/
 
 ## Libraries
